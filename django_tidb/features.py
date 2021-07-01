@@ -21,32 +21,23 @@ class DatabaseFeatures(BaseDatabaseFeatures):
     can_release_savepoints = True
     atomic_transactions = False
     supports_atomic_references_rename = False
-    can_clone_databases = True
+    can_clone_databases = False
     supports_temporal_subtraction = True
     supports_select_intersection = False
     supports_select_difference = False
     supports_slicing_ordering_in_compound = True
     supports_index_on_text_field = False
     has_case_insensitive_like = False
-    create_test_procedure_without_params_sql = """
-        CREATE PROCEDURE test_procedure ()
-        BEGIN
-            DECLARE V_I INTEGER;
-            SET V_I = 1;
-        END;
-    """
-    create_test_procedure_with_int_param_sql = """
-        CREATE PROCEDURE test_procedure (P_I INTEGER)
-        BEGIN
-            DECLARE V_I INTEGER;
-            SET V_I = P_I;
-        END;
-    """
+    create_test_procedure_without_params_sql = None
+    create_test_procedure_with_int_param_sql = None
     # Neither MySQL nor MariaDB support partial indexes.
     supports_partial_indexes = False
     # COLLATE must be wrapped in parentheses because MySQL treats COLLATE as an
     # indexed expression.
     collate_as_index_expression = True
+    indexes_foreign_keys = False
+    nulls_order_largest = False
+    can_rollback_ddl = False
 
     supports_order_by_nulls_modifier = False
     order_by_nulls_first = True
