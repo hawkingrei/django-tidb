@@ -8,6 +8,7 @@ from django.utils.functional import cached_property
 class DatabaseFeatures(BaseDatabaseFeatures):
     empty_fetchmany_value = ()
     allows_group_by_pk = True
+    uses_savepoints = True
     related_fields_match_type = True
     # MySQL doesn't support sliced subqueries with IN/ALL/ANY/SOME.
     allow_sliced_subqueries_with_in = False
