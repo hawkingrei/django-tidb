@@ -10,3 +10,4 @@ DATABASES = {
 }
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 USE_TZ = False
+SECRET_KEY = 'django_tests_secret_key'
