@@ -31,7 +31,6 @@ class DatabaseSchemaEditor(BaseDatabaseSchemaEditor):
 
     @property
     def sql_delete_check(self):
-        if self.connection.mysql_is_mariadb:
         return 'ALTER TABLE %(table)s DROP CHECK %(name)s'
 
     @property

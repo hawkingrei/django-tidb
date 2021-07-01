@@ -17,7 +17,7 @@ mkdir -p $DJANGO_TESTS_DIR
 
 pip3 install .
 git clone --depth 1 https://github.com/django/django.git $DJANGO_TESTS_DIR/django
-cp tidb_settings.py $DJANGO_TESTS_DIR/django/tidb_settings
+cp tidb_settings.py $DJANGO_TESTS_DIR/django/tidb_settings.py
 # Install dependencies for Django tests.
 sudo apt-get update
 sudo apt-get install -y libffi-dev libjpeg-dev zlib1g-devel
@@ -28,13 +28,8 @@ cd $DJANGO_TESTS_DIR/django && pip3 install -e . && pip3 install -r tests/requir
 # so that we can have multiple tests running without
 # conflicting which changes and constraints. We'll always
 # cleanup the created database.
-TEST_DBNAME=${SPANNER_TEST_DB:-$(python3 -c 'import os, time; print(chr(ord("a") + time.time_ns() % 26)+os.urandom(10).hex())')}
-TEST_DBNAME_OTHER="$TEST_DBNAME-ot"
-INSTANCE=${SPANNER_TEST_INSTANCE:-django-tests}
-PROJECT=${PROJECT_ID}
 SETTINGS_FILE="$TEST_DBNAME-settings"
 TESTS_DIR=${DJANGO_TESTS_DIR:-django_tests}
-
 
 cd $TESTS_DIR/django/tests
 
