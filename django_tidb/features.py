@@ -7,6 +7,7 @@ from django.utils.functional import cached_property
 
 class DatabaseFeatures(BaseDatabaseFeatures):
     empty_fetchmany_value = ()
+    supports_transactions = False
     allows_group_by_pk = True
     uses_savepoints = False
     related_fields_match_type = True
