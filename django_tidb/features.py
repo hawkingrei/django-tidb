@@ -19,7 +19,7 @@ class DatabaseFeatures(BaseDatabaseFeatures):
     supports_date_lookup_using_string = False
     supports_timezones = False
     requires_explicit_null_ordering_when_grouping = True
-    can_release_savepoints = True
+    can_release_savepoints = False
     atomic_transactions = False
     supports_atomic_references_rename = False
     can_clone_databases = False
@@ -458,6 +458,4 @@ class DatabaseFeatures(BaseDatabaseFeatures):
 
     @cached_property
     def can_introspect_json_field(self):
-        if self.connection.tidb_is_mariadb:
-            return self.supports_json_field and self.can_introspect_check_constraints
-        return self.supports_json_field
+        return self.supports_json_field and self.can_introspect_check_constraints

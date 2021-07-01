@@ -346,15 +346,12 @@ class DatabaseWrapper(BaseDatabaseWrapper):
     @cached_property
     def data_type_check_constraints(self):
         if self.features.supports_column_check_constraints:
-            check_constraints = {
-                'PositiveBigIntegerField': '`%(column)s` >= 0',
-                'PositiveIntegerField': '`%(column)s` >= 0',
-                'PositiveSmallIntegerField': '`%(column)s` >= 0',
-            }
-            if self.mysql_version < (10, 4, 3):
-                # MariaDB < 10.4.3 doesn't automatically use the JSON_VALID as
-                # a check constraint.
-                check_constraints['JSONField'] = 'JSON_VALID(`%(column)s`)'
+            check_constraints = {'PositiveBigIntegerField': '`%(column)s` >= 0',
+                                 'PositiveIntegerField': '`%(column)s` >= 0',
+                                 'PositiveSmallIntegerField': '`%(column)s` >= 0',
+                                 'JSONField': 'JSON_VALID(`%(column)s`)'}
+            # MariaDB < 10.4.3 doesn't automatically use the JSON_VALID as
+            # a check constraint.
             return check_constraints
         return {}
 
@@ -387,7 +384,7 @@ class DatabaseWrapper(BaseDatabaseWrapper):
         return self.tidb_server_data['version']
 
     @cached_property
-    def mysql_version(self):
+    def tidb_version(self):
         match = server_version_re.match(self.tidb_server_info)
         if not match:
             raise Exception('Unable to determine Tidb version from version string %r' % self.tidb_server_info)
