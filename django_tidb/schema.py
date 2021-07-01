@@ -60,13 +60,10 @@ class DatabaseSchemaEditor(BaseDatabaseSchemaEditor):
     def _supports_limited_data_type_defaults(self):
         # MariaDB >= 10.2.1 and MySQL >= 8.0.13 supports defaults for BLOB
         # and TEXT.
-        if self.connection.mysql_is_mariadb:
-            return self.connection.mysql_version >= (10, 2, 1)
-        return self.connection.mysql_version >= (8, 0, 13)
+        return True
 
     def _column_default_sql(self, field):
         if (
-            not self.connection.mysql_is_mariadb and
             self._supports_limited_data_type_defaults and
             self._is_limited_data_type(field)
         ):

@@ -322,12 +322,6 @@ class DatabaseOperations(BaseDatabaseOperations):
         lhs_sql, lhs_params = lhs
         rhs_sql, rhs_params = rhs
         if internal_type == 'TimeField':
-            if self.connection.mysql_is_mariadb:
-                # MariaDB includes the microsecond component in TIME_TO_SEC as
-                # a decimal. MySQL returns an integer without microseconds.
-                return 'CAST((TIME_TO_SEC(%(lhs)s) - TIME_TO_SEC(%(rhs)s)) * 1000000 AS SIGNED)' % {
-                    'lhs': lhs_sql, 'rhs': rhs_sql
-                }, (*lhs_params, *rhs_params)
             return (
                 "((TIME_TO_SEC(%(lhs)s) * 1000000 + MICROSECOND(%(lhs)s)) -"
                 " (TIME_TO_SEC(%(rhs)s) * 1000000 + MICROSECOND(%(rhs)s)))"
@@ -346,8 +340,8 @@ class DatabaseOperations(BaseDatabaseOperations):
         prefix = super().explain_query_prefix(format, **options)
         if analyze and self.connection.features.supports_explain_analyze:
             # MariaDB uses ANALYZE instead of EXPLAIN ANALYZE.
-            prefix = 'ANALYZE' if self.connection.mysql_is_mariadb else prefix + ' ANALYZE'
-        if format and not (analyze and not self.connection.mysql_is_mariadb):
+            prefix = prefix + ' ANALYZE'
+        if format and not analyze:
             # Only MariaDB supports the analyze option with formats.
             prefix += ' FORMAT=%s' % format
         return prefix
@@ -355,11 +349,6 @@ class DatabaseOperations(BaseDatabaseOperations):
     def regex_lookup(self, lookup_type):
         # REGEXP BINARY doesn't work correctly in MySQL 8+ and REGEXP_LIKE
         # doesn't exist in MySQL 5.x or in MariaDB.
-        if self.connection.mysql_version < (8, 0, 0) or self.connection.mysql_is_mariadb:
-            if lookup_type == 'regex':
-                return '%s REGEXP BINARY %s'
-            return '%s REGEXP %s'
-
         match_option = 'c' if lookup_type == 'regex' else 'i'
         return "REGEXP_LIKE(%%s, %%s, '%s')" % match_option
 
@@ -369,9 +358,5 @@ class DatabaseOperations(BaseDatabaseOperations):
     def lookup_cast(self, lookup_type, internal_type=None):
         lookup = '%s'
         if internal_type == 'JSONField':
-            if self.connection.mysql_is_mariadb or lookup_type in (
-                'iexact', 'contains', 'icontains', 'startswith', 'istartswith',
-                'endswith', 'iendswith', 'regex', 'iregex',
-            ):
-                lookup = 'JSON_UNQUOTE(%s)'
+            lookup = 'JSON_UNQUOTE(%s)'
         return lookup

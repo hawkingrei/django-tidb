@@ -76,7 +76,7 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
         interface."
         """
         json_constraints = {}
-        if self.connection.mysql_is_mariadb and self.connection.features.can_introspect_json_field:
+        if self.connection.features.can_introspect_json_field:
             # JSON data type is an alias for LONGTEXT in MariaDB, select
             # JSON_VALID() constraints to introspect JSONField.
             cursor.execute("""
@@ -242,16 +242,7 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
         if self.connection.features.can_introspect_check_constraints:
             unnamed_constraints_index = 0
             columns = {info.name for info in self.get_table_description(cursor, table_name)}
-            if self.connection.mysql_is_mariadb:
-                type_query = """
-                    SELECT c.constraint_name, c.check_clause
-                    FROM information_schema.check_constraints AS c
-                    WHERE
-                        c.constraint_schema = DATABASE() AND
-                        c.table_name = %s
-                """
-            else:
-                type_query = """
+            type_query = """
                     SELECT cc.constraint_name, cc.check_clause
                     FROM
                         information_schema.check_constraints AS cc,
