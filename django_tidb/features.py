@@ -20,6 +20,7 @@ class DatabaseFeatures(BaseDatabaseFeatures):
     requires_explicit_null_ordering_when_grouping = True
     can_release_savepoints = True
     atomic_transactions = False
+    supports_atomic_references_rename = False
     can_clone_databases = True
     supports_temporal_subtraction = True
     supports_select_intersection = False
