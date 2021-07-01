@@ -6,9 +6,6 @@
 
 set -x pipefail
 
-sudo apt-get update -y
-sudo apt-get install -y libmemcached-dev
-
 # Disable buffering, so that the logs stream through.
 export PYTHONUNBUFFERED=1
 
@@ -18,9 +15,6 @@ mkdir -p $DJANGO_TESTS_DIR
 pip3 install .
 git clone --depth 1 https://github.com/django/django.git $DJANGO_TESTS_DIR/django
 cp tidb_settings.py $DJANGO_TESTS_DIR/django/tidb_settings.py
-# Install dependencies for Django tests.
-sudo apt-get update
-sudo apt-get install -y libffi-dev libjpeg-dev zlib1g-devel
 
 cd $DJANGO_TESTS_DIR/django && pip3 install -e . && pip3 install -r tests/requirements/py3.txt; cd ../../
 
