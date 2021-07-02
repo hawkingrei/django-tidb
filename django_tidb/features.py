@@ -78,8 +78,7 @@ class DatabaseFeatures(BaseDatabaseFeatures):
                 'aggregation_regress.tests.AggregationTests.test_aggregate_duplicate_columns_select_related',
                 'aggregation_regress.tests.AggregationTests.test_boolean_conversion',
                 'aggregation_regress.tests.AggregationTests.test_more_more',
-                'aggregation_regress.tests.JoinPromotionTests.test_ticket_21150'.
-
+                'aggregation_regress.tests.JoinPromotionTests.test_ticket_21150',
             }
         }
         return skips
