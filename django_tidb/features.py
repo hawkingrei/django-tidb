@@ -68,6 +68,7 @@ class DatabaseFeatures(BaseDatabaseFeatures):
                 'expressions.tests.FTimeDeltaTests.test_durationfield_multiply_divide',
             },
             "tidb": {
+                # https://github.com/pingcap/tidb/issues/25883
                 "or_lookups.tests.OrLookupsTests",
             }
         }
