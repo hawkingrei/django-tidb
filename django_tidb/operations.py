@@ -8,7 +8,6 @@ from django.db.backends.mysql.operations import (
     DatabaseOperations as MysqlDatabaseOperations,
 )
 
-
 class DatabaseOperations(MysqlDatabaseOperations):
     def regex_lookup(self, lookup_type):
         # REGEXP BINARY doesn't work correctly in MySQL 8+ and REGEXP_LIKE

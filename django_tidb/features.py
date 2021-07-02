@@ -3,50 +3,19 @@ import operator
 
 from django.db.backends.base.features import BaseDatabaseFeatures
 from django.utils.functional import cached_property
+from django.db.backends.mysql.feature import (
+    DatabaseFeatures as MysqlDatabaseFeatures,
+)
 
+class DatabaseFeatures(MysqlDatabaseFeatures):
 
-class DatabaseFeatures(BaseDatabaseFeatures):
-    empty_fetchmany_value = ()
     supports_transactions = False
-    allows_group_by_pk = True
     uses_savepoints = False
-    related_fields_match_type = True
-    # MySQL doesn't support sliced subqueries with IN/ALL/ANY/SOME.
-    allow_sliced_subqueries_with_in = False
-    has_select_for_update = True
-    supports_forward_references = False
-    supports_regex_backreferencing = False
-    supports_date_lookup_using_string = False
-    supports_timezones = False
-    requires_explicit_null_ordering_when_grouping = True
     can_release_savepoints = False
     atomic_transactions = False
     supports_atomic_references_rename = False
     can_clone_databases = False
-    supports_temporal_subtraction = True
-    supports_select_intersection = False
-    supports_select_difference = False
-    supports_slicing_ordering_in_compound = True
-    supports_index_on_text_field = False
-    has_case_insensitive_like = False
-    create_test_procedure_without_params_sql = None
-    create_test_procedure_with_int_param_sql = None
-    # Neither MySQL nor MariaDB support partial indexes.
-    supports_partial_indexes = False
-    # COLLATE must be wrapped in parentheses because MySQL treats COLLATE as an
-    # indexed expression.
-    collate_as_index_expression = True
-    indexes_foreign_keys = False
-    nulls_order_largest = False
     can_rollback_ddl = False
-
-    supports_order_by_nulls_modifier = False
-    order_by_nulls_first = True
-    test_collations = {
-        'ci': 'utf8_general_ci',
-        'non_default': 'utf8_esperanto_ci',
-        'swedish_ci': 'utf8_swedish_ci',
-    }
 
     @cached_property
     def django_test_skips(self):
@@ -89,17 +58,8 @@ class DatabaseFeatures(BaseDatabaseFeatures):
         return skips
 
     @cached_property
-    def _tidb_storage_engine(self):
-        "Internal method used in Django tests. Don't rely on this from your code"
-        return self.connection.tidb_server_data['default_storage_engine']
-
-    @cached_property
-    def allows_auto_pk_0(self):
-        """
-        Autoincrement primary key can be set to 0 if it doesn't generate new
-        autoincrement values.
-        """
-        return 'NO_AUTO_VALUE_ON_ZERO' in self.connection.sql_mode
+    def update_can_self_select(self):
+        return True
 
     @cached_property
     def can_introspect_foreign_keys(self):
@@ -107,14 +67,10 @@ class DatabaseFeatures(BaseDatabaseFeatures):
         return False
 
     @cached_property
-    def introspected_field_types(self):
-        return {
-            **super().introspected_field_types,
-            'BinaryField': 'TextField',
-            'BooleanField': 'IntegerField',
-            'DurationField': 'BigIntegerField',
-            'GenericIPAddressField': 'CharField',
-        }
+    def can_return_columns_from_insert(self):
+        return False
+
+    can_return_rows_from_bulk_insert = property(operator.attrgetter('can_return_columns_from_insert'))
 
     @cached_property
     def has_zoneinfo_database(self):
@@ -125,6 +81,38 @@ class DatabaseFeatures(BaseDatabaseFeatures):
         return self.connection.tidb_server_data['sql_auto_is_null']
 
     @cached_property
+    def supports_over_clause(self):
+        return True
+
+    supports_frame_range_fixed_distance = property(operator.attrgetter('supports_over_clause'))
+
+    @cached_property
+    def supports_column_check_constraints(self):
+        return True
+
+    supports_table_check_constraints = property(operator.attrgetter('supports_column_check_constraints'))
+
+    @cached_property
+    def can_introspect_check_constraints(self):
+        return False
+
+    @cached_property
+    def has_select_for_update_skip_locked(self):
+        return False
+
+    @cached_property
+    def has_select_for_update_nowait(self):
+        return False
+
+    @cached_property
+    def has_select_for_update_of(self):
+        return True
+
+    @cached_property
+    def supports_explain_analyze(self):
+        return True
+
+    @cached_property
     def supported_explain_formats(self):
         return {'ROW', 'DOT', 'JSON', 'HINT', 'VERBOSE', 'BRIEF'}
 
@@ -133,5 +121,21 @@ class DatabaseFeatures(BaseDatabaseFeatures):
         return self.connection.tidb_server_data['lower_case_table_names']
 
     @cached_property
+    def supports_default_in_lead_lag(self):
+        return True
+
+    @cached_property
+    def supports_json_field(self):
+        return True
+
+    @cached_property
     def can_introspect_json_field(self):
         return self.supports_json_field and self.can_introspect_check_constraints
+
+    @cached_property
+    def supports_index_column_ordering(self):
+        return False
+
+    @cached_property
+    def supports_expression_indexes(self):
+        return False

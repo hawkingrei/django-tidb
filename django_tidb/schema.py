@@ -16,8 +16,6 @@ class DatabaseSchemaEditor(MysqlDatabaseSchemaEditor):
 
     @property
     def _supports_limited_data_type_defaults(self):
-        # MariaDB >= 10.2.1 and MySQL >= 8.0.13 supports defaults for BLOB
-        # and TEXT.
         return True
 
     def _field_should_be_indexed(self, model, field):

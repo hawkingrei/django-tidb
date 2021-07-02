@@ -12,7 +12,6 @@ from django.utils.regex_helper import _lazy_re_compile
 from django.db.backends.mysql import base as mysql_base
 
 # Some of these import MySQLdb, so import them after checking if it's installed.
-from .client import DatabaseClient
 from .features import DatabaseFeatures
 from .introspection import DatabaseIntrospection
 from .operations import DatabaseOperations
@@ -29,7 +28,6 @@ class DatabaseWrapper(mysql_base.DatabaseWrapper):
 
     SchemaEditorClass = DatabaseSchemaEditor
     # Classes instantiated in __init__().
-    client_class = DatabaseClient
     features_class = DatabaseFeatures
     introspection_class = DatabaseIntrospection
     ops_class = DatabaseOperations
