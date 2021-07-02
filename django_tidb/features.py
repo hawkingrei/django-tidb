@@ -70,6 +70,8 @@ class DatabaseFeatures(BaseDatabaseFeatures):
             "tidb": {
                 # https://github.com/pingcap/tidb/issues/25883
                 'or_lookups.tests.OrLookupsTests.test_empty_in',
+
+                'aggregation.tests.AggregateTestCase.test_annotate_defer_select_related'
             }
         }
         return skips

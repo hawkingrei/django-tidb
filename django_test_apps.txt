@@ -1,4 +1,5 @@
 admin_utils
+aggregation
 custom_lookups
 from_db_value
 generic_inline_admin
@@ -18,4 +19,10 @@ model_options
 model_package
 model_regress
 one_to_one
+or_lookups
 pagination
+timezones
+update
+update_only_fields
+validation
+view_tests
