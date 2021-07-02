@@ -13,6 +13,7 @@ generic_relations_regress
 generic_views
 i18n
 indexes
+invalid_models_tests
 modeladmin
 model_regress
 model_forms
