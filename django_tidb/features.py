@@ -3,7 +3,7 @@ import operator
 
 from django.db.backends.base.features import BaseDatabaseFeatures
 from django.utils.functional import cached_property
-from django.db.backends.mysql.feature import (
+from django.db.backends.mysql.features import (
     DatabaseFeatures as MysqlDatabaseFeatures,
 )
 
