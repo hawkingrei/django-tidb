@@ -19,70 +19,10 @@ from .features import DatabaseFeatures
 from .introspection import DatabaseIntrospection
 from .operations import DatabaseOperations
 from .schema import DatabaseSchemaEditor
-from .validation import DatabaseValidation
-
-version = Database.version_info
-if version < (1, 4, 0):
-    raise ImproperlyConfigured('mysqlclient 1.4.0 or newer is required; you have %s.' % Database.__version__)
-
-
-# MySQLdb returns TIME columns as timedelta -- they are more like timedelta in
-# terms of actual behavior as they are signed and include days -- and Django
-# expects time.
-django_conversions = {
-    **conversions,
-    **{FIELD_TYPE.TIME: backend_utils.typecast_time},
-}
 
 # This should match the numerical portion of the version numbers (we can treat
 # versions like 5.0.24 and 5.0.24a as the same).
 server_version_re = _lazy_re_compile(r'(\d{1,2})\.(\d{1,2})\.(\d{1,2})')
-
-
-class CursorWrapper:
-    """
-    A thin wrapper around MySQLdb's normal cursor class that catches particular
-    exception instances and reraises them with the correct types.
-    Implemented as a wrapper, rather than a subclass, so that it isn't stuck
-    to the particular underlying representation returned by Connection.cursor().
-    """
-    codes_for_integrityerror = (
-        1048,  # Column cannot be null
-        1690,  # BIGINT UNSIGNED value is out of range
-        3819,  # CHECK constraint is violated
-        4025,  # CHECK constraint failed
-    )
-
-    def __init__(self, cursor):
-        self.cursor = cursor
-
-    def execute(self, query, args=None):
-        try:
-            # args is None means no string interpolation
-            return self.cursor.execute(query, args)
-        except Database.OperationalError as e:
-            # Map some error codes to IntegrityError, since they seem to be
-            # misclassified and Django would prefer the more logical place.
-            if e.args[0] in self.codes_for_integrityerror:
-                raise IntegrityError(*tuple(e.args))
-            raise
-
-    def executemany(self, query, args):
-        try:
-            return self.cursor.executemany(query, args)
-        except Database.OperationalError as e:
-            # Map some error codes to IntegrityError, since they seem to be
-            # misclassified and Django would prefer the more logical place.
-            if e.args[0] in self.codes_for_integrityerror:
-                raise IntegrityError(*tuple(e.args))
-            raise
-
-    def __getattr__(self, attr):
-        return getattr(self.cursor, attr)
-
-    def __iter__(self):
-        return iter(self.cursor)
-
 
 class DatabaseWrapper(mysql.DatabaseWrapper):
     vendor = 'tidb'
