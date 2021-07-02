@@ -1,5 +1,6 @@
 admin_utils
 aggregation
+aggregation_regress
 custom_lookups
 from_db_value
 generic_inline_admin

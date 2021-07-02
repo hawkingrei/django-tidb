@@ -71,7 +71,15 @@ class DatabaseFeatures(BaseDatabaseFeatures):
                 # https://github.com/pingcap/tidb/issues/25883
                 'or_lookups.tests.OrLookupsTests.test_empty_in',
 
-                'aggregation.tests.AggregateTestCase.test_annotate_defer_select_related'
+                # "Expression #5 of SELECT list is not in GROUP BY clause and contains nonaggregated column
+                # 'test_django_tests.aggregation_regress_alfa.id' which is not functionally dependent on columns in
+                # GROUP BY clause; this is incompatible with sql_mode=only_full_group_by"
+                'aggregation.tests.AggregateTestCase.test_annotate_defer_select_related',
+                'aggregation_regress.tests.AggregationTests.test_aggregate_duplicate_columns_select_related',
+                'aggregation_regress.tests.AggregationTests.test_boolean_conversion',
+                'aggregation_regress.tests.AggregationTests.test_more_more',
+                'aggregation_regress.tests.JoinPromotionTests.test_ticket_21150'.
+
             }
         }
         return skips
