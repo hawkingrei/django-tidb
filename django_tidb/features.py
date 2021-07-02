@@ -81,7 +81,7 @@ class DatabaseFeatures(BaseDatabaseFeatures):
                 'aggregation_regress.tests.JoinPromotionTests.test_ticket_21150',
 
                 # Unsupported multi schema change
-                'indexes.tests.SchemaIndexesMySQLTests.test_no_index_for_foreignkey'
+                'indexes.tests.SchemaIndexesMySQLTests.test_no_index_for_foreignkey',
                 
                 'lookup.tests.LookupTests.test_regex'
             }
