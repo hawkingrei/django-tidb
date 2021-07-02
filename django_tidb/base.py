@@ -24,7 +24,8 @@ server_version_re = _lazy_re_compile(r'(\d{1,2})\.(\d{1,2})\.(\d{1,2})')
 
 
 class DatabaseWrapper(mysql_base.DatabaseWrapper):
-    vendor = 'tidb'
+    vendor = 'TiDB'
+    display_name = 'TiDB'
 
     SchemaEditorClass = DatabaseSchemaEditor
     # Classes instantiated in __init__().
