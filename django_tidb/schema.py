@@ -1,8 +1,8 @@
-from django.db.backends.mysql.operations import (
-    DatabaseSchemaEditor as MysqlDatabaseOperations,
+from django.db.backends.mysql.schema import (
+    DatabaseSchemaEditor as MysqlDatabaseSchemaEditor,
 )
 
-class DatabaseSchemaEditor(MysqlDatabaseOperations):
+class DatabaseSchemaEditor(MysqlDatabaseSchemaEditor):
     @property
     def sql_delete_check(self):
         return 'ALTER TABLE %(table)s DROP CHECK %(name)s'
