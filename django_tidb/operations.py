@@ -349,8 +349,9 @@ class DatabaseOperations(BaseDatabaseOperations):
     def regex_lookup(self, lookup_type):
         # REGEXP BINARY doesn't work correctly in MySQL 8+ and REGEXP_LIKE
         # doesn't exist in MySQL 5.x or in MariaDB.
-        match_option = 'c' if lookup_type == 'regex' else 'i'
-        return "REGEXP_LIKE(%%s, %%s, '%s')" % match_option
+        if lookup_type == 'regex':
+            return '%s REGEXP BINARY %s'
+        return '%s REGEXP %s'
 
     def insert_statement(self, ignore_conflicts=False):
         return 'INSERT IGNORE INTO' if ignore_conflicts else super().insert_statement(ignore_conflicts)

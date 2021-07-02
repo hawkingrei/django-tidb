@@ -14,6 +14,7 @@ generic_views
 i18n
 indexes
 invalid_models_tests
+known_related_objects
 modeladmin
 model_regress
 model_forms
