@@ -12,7 +12,7 @@ version = PACKAGE_INFO["__version__"]
 
 setup(
     name='django-tidb',
-    dependencies=["sqlparse >= 0.3.0"],
+    dependencies=["sqlparse >= 0.3.0", "mysqlclient >= 1.4.0"],
     version=version,
     python_requires='>=3.6',
     url='https://github.com/pingcap/django-tidb',
