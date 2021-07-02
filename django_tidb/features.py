@@ -69,19 +69,10 @@ class DatabaseFeatures(BaseDatabaseFeatures):
             },
             "tidb": {
                 # https://github.com/pingcap/tidb/issues/25883
-                'or_lookups.tests.OrLookupsTests',
+                'or_lookups.tests.OrLookupsTests.test_empty_in',
             }
         }
         return skips
-
-    @cached_property
-    def django_test_expected_failures(self):
-        expected_failures = super().django_test_expected_failures
-        expected_failures.update({
-            # https://github.com/pingcap/tidb/issues/25883
-            'or_lookups.tests.OrLookupsTests',
-        })
-        return expected_failures
 
     @cached_property
     def _tidb_storage_engine(self):
