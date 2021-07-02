@@ -79,6 +79,9 @@ class DatabaseFeatures(BaseDatabaseFeatures):
                 'aggregation_regress.tests.AggregationTests.test_boolean_conversion',
                 'aggregation_regress.tests.AggregationTests.test_more_more',
                 'aggregation_regress.tests.JoinPromotionTests.test_ticket_21150',
+
+                # Unsupported multi schema change
+                'indexes.tests.SchemaIndexesMySQLTests.test_no_index_for_foreignkey'
             }
         }
         return skips
