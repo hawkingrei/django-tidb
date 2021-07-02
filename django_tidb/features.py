@@ -49,6 +49,10 @@ class DatabaseFeatures(BaseDatabaseFeatures):
     }
     # Django tests that aren't supported by Spanner.
     skip_tests = (
+        # TiDB
+        # https://github.com/pingcap/tidb/issues/25883
+        "or_lookups.tests.OrLookupsTests",
+
         # No foreign key constraints in Spanner.
         "backends.tests.FkConstraintsTests.test_check_constraints",
         "fixtures_regress.tests.TestFixtures.test_loaddata_raises_error_when_fixture_has_invalid_foreign_key",
