@@ -15,6 +15,7 @@ i18n
 indexes
 invalid_models_tests
 known_related_objects
+lookup
 modeladmin
 model_regress
 model_forms
