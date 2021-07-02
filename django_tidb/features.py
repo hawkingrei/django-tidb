@@ -82,6 +82,8 @@ class DatabaseFeatures(BaseDatabaseFeatures):
 
                 # Unsupported multi schema change
                 'indexes.tests.SchemaIndexesMySQLTests.test_no_index_for_foreignkey'
+                
+                'lookup.tests.LookupTests.test_regex'
             }
         }
         return skips
