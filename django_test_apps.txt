@@ -1,3 +1,7 @@
+admin_custom_urls
+admin_docs
+admin_inlines
+admin_ordering
 admin_utils
 aggregation
 aggregation_regress
@@ -7,6 +11,8 @@ generic_inline_admin
 generic_relations
 generic_relations_regress
 generic_views
+i18n
+indexes
 modeladmin
 model_regress
 model_forms
