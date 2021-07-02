@@ -9,8 +9,7 @@ from django.db.backends.base.base import BaseDatabaseWrapper
 from django.utils.asyncio import async_unsafe
 from django.utils.functional import cached_property
 from django.utils.regex_helper import _lazy_re_compile
-
-from django.db.backends import mysql
+from django.db.backends.mysql import base as mysql_base
 
 # Some of these import MySQLdb, so import them after checking if it's installed.
 from .client import DatabaseClient
@@ -24,7 +23,8 @@ from .schema import DatabaseSchemaEditor
 # versions like 5.0.24 and 5.0.24a as the same).
 server_version_re = _lazy_re_compile(r'(\d{1,2})\.(\d{1,2})\.(\d{1,2})')
 
-class DatabaseWrapper(mysql.DatabaseWrapper):
+
+class DatabaseWrapper(mysql_base.DatabaseWrapper):
     vendor = 'tidb'
 
     SchemaEditorClass = DatabaseSchemaEditor
@@ -34,7 +34,6 @@ class DatabaseWrapper(mysql.DatabaseWrapper):
     features_class = DatabaseFeatures
     introspection_class = DatabaseIntrospection
     ops_class = DatabaseOperations
-    validation_class = mysql.DatabaseValidation
 
     @cached_property
     def display_name(self):
