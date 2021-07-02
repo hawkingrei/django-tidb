@@ -82,6 +82,9 @@ class DatabaseFeatures(BaseDatabaseFeatures):
 
                 # Unsupported multi schema change
                 'indexes.tests.SchemaIndexesMySQLTests.test_no_index_for_foreignkey'
+
+                # ImportError: Failed to import test module: invalid_models_tests.test_models
+                'invalid_models_tests.test_models',
             }
         }
         return skips
