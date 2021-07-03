@@ -17,7 +17,7 @@ class DatabaseOperations(MysqlDatabaseOperations):
             # Use TREE by default (if supported) as it's more informative.
             format = 'TREE'
         analyze = options.pop('analyze', False)
-        prefix = super().explain_query_prefix(format, **options)
+        prefix = self.explain_prefix
         if analyze and self.connection.features.supports_explain_analyze:
             prefix = prefix + ' ANALYZE'
         if format:
