@@ -18,9 +18,11 @@ class DatabaseOperations(MysqlDatabaseOperations):
             format = 'TREE'
         analyze = options.pop('analyze', False)
         prefix = super().explain_query_prefix(format, **options)
-        if analyze:
-            # MariaDB uses ANALYZE instead of EXPLAIN ANALYZE.
-            prefix = 'ANALYZE' if self.connection.mysql_is_mariadb else prefix + ' ANALYZE'
+        if analyze and self.connection.features.supports_explain_analyze:
+            prefix = prefix + ' ANALYZE'
+        if format:
+            # Only MariaDB supports the analyze option with formats.
+            prefix += ' FORMAT=%s' % format
         return prefix
 
     def regex_lookup(self, lookup_type):
