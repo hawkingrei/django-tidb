@@ -48,6 +48,9 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'aggregation_regress.tests.AggregationTests.test_boolean_conversion',
                 'aggregation_regress.tests.AggregationTests.test_more_more',
                 'aggregation_regress.tests.JoinPromotionTests.test_ticket_21150',
+                'aggregation.tests.AggregateTestCase.test_sum_duration_field',
+                'aggregation.tests.AggregateTestCase.test_avg_duration_field',
+                'aggregation.tests.AggregateTestCase.test_aggregation_random_ordering',
 
                 # Unsupported multi schema change
                 'indexes.tests.SchemaIndexesMySQLTests.test_no_index_for_foreignkey',
