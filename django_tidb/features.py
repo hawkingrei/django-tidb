@@ -8,7 +8,8 @@ from django.db.backends.mysql.features import (
 )
 
 class DatabaseFeatures(MysqlDatabaseFeatures):
-
+    supports_select_union = False
+    has_select_for_update = False
     supports_transactions = False
     uses_savepoints = False
     can_release_savepoints = False
