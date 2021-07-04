@@ -55,7 +55,17 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 # Unsupported multi schema change
                 'indexes.tests.SchemaIndexesMySQLTests.test_no_index_for_foreignkey',
                 
-                'lookup.tests.LookupTests.test_regex'
+                'lookup.tests.LookupTests.test_regex',
+
+                'queries.tests.ComparisonTests.test_ticket8597',
+                'queries.test_qs_combinators.QuerySetSetOperationTests.test_union_with_values_list_and_order_on_annotation',
+                'queries.test_qs_combinators.QuerySetSetOperationTests.test_union_with_values_list_and_order',
+                'queries.test_qs_combinators.QuerySetSetOperationTests.test_ordering_subqueries',
+                'queries.test_qs_combinators.QuerySetSetOperationTests.test_ordering_by_f_expression_and_alias',
+                'queries.test_qs_combinators.QuerySetSetOperationTests.test_ordering_by_f_expression',
+                'queries.test_qs_combinators.QuerySetSetOperationTests.test_ordering_by_alias',
+                'queries.test_qs_combinators.QuerySetSetOperationTests.test_ordering',
+                'queries.test_qs_combinators.QuerySetSetOperationTests.test_order_by_same_type',
             }
         }
         return skips
@@ -129,7 +139,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
     @cached_property
     def supports_json_field(self):
-        return True
+        return False
 
     @cached_property
     def can_introspect_json_field(self):
