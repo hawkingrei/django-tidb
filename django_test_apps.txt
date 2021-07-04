@@ -10,7 +10,6 @@ delete
 delete_regress
 distinct_on_fields
 empty
-expressions
 expressions_case
 from_db_value
 generic_inline_admin
