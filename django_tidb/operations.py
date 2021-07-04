@@ -10,6 +10,16 @@ from django.db.backends.mysql.operations import (
 
 class DatabaseOperations(MysqlDatabaseOperations):
     def explain_query_prefix(self, format=None, **options):
+        if format:
+            supported_formats = self.connection.features.supported_explain_formats
+            normalized_format = format.upper()
+            if normalized_format not in supported_formats:
+                msg = '%s is not a recognized format.' % normalized_format
+                if supported_formats:
+                    msg += ' Allowed formats: %s' % ', '.join(sorted(supported_formats))
+                raise ValueError(msg)
+        if options:
+            raise ValueError('Unknown options: %s' % ', '.join(sorted(options.keys())))
         analyze = options.pop('analyze', False)
         prefix = self.explain_prefix
         if analyze and self.connection.features.supports_explain_analyze:
