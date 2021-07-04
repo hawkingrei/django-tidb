@@ -16,7 +16,11 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
     supports_atomic_references_rename = False
     can_clone_databases = False
     can_rollback_ddl = False
-
+    order_by_nulls_first = False
+    test_collations = {
+        'ci': 'utf8_general_ci',
+        'non_default': 'utf8mb4_unicode_ci',
+    }
     @cached_property
     def django_test_skips(self):
         skips = {
