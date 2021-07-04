@@ -1,8 +1,4 @@
-#!/bin/sh
-
-# Copyright (c) 2020 Google LLC. All rights reserved.
-# Use of this source code is governed by a BSD-style
-# license that can be found in the LICENSE file.
+#!/bin/bash
 
 set -x pipefail
 
@@ -31,5 +27,8 @@ EXIT_STATUS=0
 for DJANGO_TEST_APP in $DJANGO_TEST_APPS
 do
    python3 runtests.py $DJANGO_TEST_APP --verbosity=3 --noinput --settings tidb_settings || EXIT_STATUS=$?
+   if [[ $EXIT_STATUS -ne 0 ]]; then
+      exit $EXIT_STATUS
+   fi
 done
 exit $EXIT_STATUS
