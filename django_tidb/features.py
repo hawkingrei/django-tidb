@@ -124,7 +124,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
     @cached_property
     def has_select_for_update_of(self):
-        return True
+        return False
 
     @cached_property
     def supports_explain_analyze(self):
