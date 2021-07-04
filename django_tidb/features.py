@@ -66,6 +66,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'queries.test_qs_combinators.QuerySetSetOperationTests.test_ordering_by_alias',
                 'queries.test_qs_combinators.QuerySetSetOperationTests.test_ordering',
                 'queries.test_qs_combinators.QuerySetSetOperationTests.test_order_by_same_type',
+                'queries.test_qs_combinators.QuerySetSetOperationTests.test_combining_multiple_models',
             }
         }
         return skips

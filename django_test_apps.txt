@@ -35,6 +35,7 @@ model_regress
 one_to_one
 or_lookups
 pagination
+queries
 timezones
 update
 update_only_fields
