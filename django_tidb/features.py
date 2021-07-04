@@ -8,7 +8,6 @@ from django.db.backends.mysql.features import (
 )
 
 class DatabaseFeatures(MysqlDatabaseFeatures):
-    supports_select_union = False
     has_select_for_update = False
     supports_transactions = False
     uses_savepoints = False
@@ -118,7 +117,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
     @cached_property
     def supported_explain_formats(self):
-        return {'ROW', 'DOT', 'VERBOSE', 'HINT'}
+        return {'DOT', 'ROW', 'BRIEF'}
 
     @cached_property
     def ignores_table_name_case(self):
