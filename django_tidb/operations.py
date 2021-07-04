@@ -11,14 +11,12 @@ from django.db.backends.mysql.operations import (
 class DatabaseOperations(MysqlDatabaseOperations):
     def explain_query_prefix(self, format=None, **options):
         analyze = options.pop('analyze', False)
-        prefix = super().explain_query_prefix(format, **options)
+        prefix = self.explain_prefix
         if analyze and self.connection.features.supports_explain_analyze:
-            # MariaDB uses ANALYZE instead of EXPLAIN ANALYZE.
             prefix += ' ANALYZE'
-        #TODO support format
         if format and not analyze:
-            # Only MariaDB supports the analyze option with formats.
-            prefix += ' FORMAT=\'%s\'' % format
+            # Only TiDB supports the analyze option with formats but with "ROW".
+            prefix += ' FORMAT=\"%s\"' % format
         return prefix
 
     def regex_lookup(self, lookup_type):
