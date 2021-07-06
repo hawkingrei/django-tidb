@@ -4,7 +4,7 @@ DATABASES = {
         'NAME': 'django_tests',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': 4000,
     },
     'other': {
@@ -12,7 +12,7 @@ DATABASES = {
         'NAME': 'django_tests',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': 4000,
     },
 }
