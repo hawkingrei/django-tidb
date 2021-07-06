@@ -6,12 +6,16 @@ admin_utils
 aggregation
 aggregation_regress
 custom_lookups
+defer
 delete
 delete_regress
 distinct_on_fields
 empty
 expressions_case
+expressions_window
 from_db_value
+file_storage
+file_uploads
 generic_inline_admin
 generic_relations
 generic_relations_regress

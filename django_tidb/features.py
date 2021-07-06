@@ -71,6 +71,15 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'queries.test_qs_combinators.QuerySetSetOperationTests.test_ordering',
                 'queries.test_qs_combinators.QuerySetSetOperationTests.test_order_by_same_type',
                 'queries.test_qs_combinators.QuerySetSetOperationTests.test_combining_multiple_models',
+
+                # is unrelation with tidb
+                'file_uploads.tests.DirectoryCreationTests.test_readonly_root',
+
+                # interface conversion: interface {} is int64, not uint64'
+                # https://github.com/pingcap/tidb/issues/25956
+                'expressions_window.tests.WindowFunctionTests,test_max_per_year',
+                'expressions_window.tests.WindowFunctionTests.test_min_department',
+                'expressions_window.tests.WindowFunctionTests.test_multiple_partitioning',
             }
         }
         return skips
