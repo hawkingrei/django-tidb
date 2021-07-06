@@ -77,7 +77,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
                 # interface conversion: interface {} is int64, not uint64'
                 # https://github.com/pingcap/tidb/issues/25956
-                'expressions_window.tests.WindowFunctionTests,test_max_per_year',
+                'expressions_window.tests.WindowFunctionTests.test_max_per_year',
                 'expressions_window.tests.WindowFunctionTests.test_min_department',
                 'expressions_window.tests.WindowFunctionTests.test_multiple_partitioning',
             }
