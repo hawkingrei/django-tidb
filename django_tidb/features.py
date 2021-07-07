@@ -17,6 +17,8 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
     can_clone_databases = False
     can_rollback_ddl = False
     order_by_nulls_first = False
+    supports_foreign_keys = False
+    indexes_foreign_keys = False
     test_collations = {
         'ci': 'utf8_general_ci',
         'non_default': 'utf8mb4_unicode_ci',
