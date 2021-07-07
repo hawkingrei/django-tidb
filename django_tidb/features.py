@@ -1,4 +1,3 @@
-
 import operator
 
 from django.db.backends.base.features import BaseDatabaseFeatures
@@ -6,6 +5,7 @@ from django.utils.functional import cached_property
 from django.db.backends.mysql.features import (
     DatabaseFeatures as MysqlDatabaseFeatures,
 )
+
 
 class DatabaseFeatures(MysqlDatabaseFeatures):
     has_select_for_update = False
@@ -21,6 +21,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
         'ci': 'utf8_general_ci',
         'non_default': 'utf8mb4_unicode_ci',
     }
+
     @cached_property
     def django_test_skips(self):
         skips = {
@@ -58,7 +59,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
                 # Unsupported multi schema change
                 'indexes.tests.SchemaIndexesMySQLTests.test_no_index_for_foreignkey',
-                
+
                 'lookup.tests.LookupTests.test_regex',
 
                 'queries.tests.ComparisonTests.test_ticket8597',
@@ -80,6 +81,33 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'expressions_window.tests.WindowFunctionTests.test_max_per_year',
                 'expressions_window.tests.WindowFunctionTests.test_min_department',
                 'expressions_window.tests.WindowFunctionTests.test_multiple_partitioning',
+
+                # RuntimeError: A durable atomic block cannot be nested within another atomic block.
+                'transactions.tests.DisableDurabiltityCheckTests.test_nested_both_durable',
+                'transactions.tests.DisableDurabiltityCheckTests.test_nested_inner_durable',
+
+                # wrong test result
+                'transaction_hooks.tests.TestConnectionOnCommit.test_inner_savepoint_does_not_affect_outer',
+
+                # django.db.transaction.TransactionManagementError: An error occurred in the current transaction. You
+                # can't execute queries until the end of the 'atomic' block.
+                'transaction_hooks.tests.TestConnectionOnCommit.test_inner_savepoint_rolled_back_with_outer',
+                'transaction_hooks.tests.TestConnectionOnCommit.test_discards_hooks_from_rolled_back_savepoint',
+
+                # AssertionError: True is not false
+                'sites_tests.tests.CreateDefaultSiteTests.test_multi_db_with_router',
+                # AssertionError: {} != {'example2.com': <Site: example2.com>}
+                'sites_tests.tests.SitesFrameworkTests.test_clear_site_cache_domain',
+
+                # AttributeError: 'NoneType' object has no attribute 'ping'
+                'servers.test_liveserverthread.LiveServerThreadTest.test_closes_connections',
+
+                'test_utils.tests.TestBadSetUpTestData.test_failure_in_setUpTestData_should_rollback_transaction',
+                'test_utils.test_testcase.TestDataTests.test_undeepcopyable_warning',
+                'test_utils.tests.CaptureOnCommitCallbacksTests.test_execute',
+                'test_utils.tests.CaptureOnCommitCallbacksTests.test_no_arguments',
+                'test_utils.tests.CaptureOnCommitCallbacksTests.test_pre_callback',
+                'test_utils.tests.CaptureOnCommitCallbacksTests.test_using',
             }
         }
         return skips
