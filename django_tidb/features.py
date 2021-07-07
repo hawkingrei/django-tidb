@@ -104,6 +104,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
                 'test_utils.tests.TestBadSetUpTestData.test_failure_in_setUpTestData_should_rollback_transaction',
                 'test_utils.test_testcase.TestDataTests.test_undeepcopyable_warning',
+                'test_utils.test_testcase.TestDataTests.test_class_attribute_identity',
                 'test_utils.tests.CaptureOnCommitCallbacksTests.test_execute',
                 'test_utils.tests.CaptureOnCommitCallbacksTests.test_no_arguments',
                 'test_utils.tests.CaptureOnCommitCallbacksTests.test_pre_callback',
