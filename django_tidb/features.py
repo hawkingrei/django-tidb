@@ -116,6 +116,15 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 # [planner:3065]Expression #1 of ORDER BY clause is not in SELECT list, references column '' which is
                 # not in SELECT list; this is incompatible with
                 'ordering.tests.OrderingTests.test_orders_nulls_first_on_filtered_subquery',
+
+                'schema.tests.SchemaTests.test_rename_referenced_field',
+                'schema.tests.SchemaTests.test_remove_db_index_doesnt_remove_custom_indexes',
+                'schema.tests.SchemaTests.test_remove_constraints_capital_letters',
+                'schema.tests.SchemaTests.test_m2m_repoint_inherited',
+                'schema.tests.SchemaTests.test_m2m_repoint_custom',
+                'schema.tests.SchemaTests.test_m2m_repoint',
+                'schema.tests.SchemaTests.test_indexes',
+                'schema.tests.SchemaTests.test_foreign_key_index_long_names_regression',
             }
         }
         return skips

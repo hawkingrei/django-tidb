@@ -51,6 +51,8 @@ null_fk_ordering
 null_queries
 one_to_one
 or_lookups
+order_with_respect_to
+ordering
 pagination
 queries
 select_for_update
