@@ -55,10 +55,17 @@ order_with_respect_to
 ordering
 pagination
 queries
+queryset_pickle
+raw_query
+reserved_names
+reverse_lookup
+save_delete_hooks
+schema
 select_for_update
 select_related
 select_related_onetoone
 select_related_regress
+serializers
 servers
 signals
 sitemaps_tests

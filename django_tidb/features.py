@@ -143,8 +143,31 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 # Unsupported drop integer primary key
                 'schema.tests.SchemaTests.test_alter_not_unique_field_to_primary_key',
 
+                # Unsupported modify column: can't set auto_increment
+                'schema.tests.SchemaTests.test_alter_smallint_pk_to_smallautofield_pk',
 
+                # BLOB/TEXT/JSON column 'address' can't have a default value
+                'schema.tests.SchemaTests.test_alter_text_field_to_not_null_with_default_value',
 
+                # Unsupported modify column: this column has primary key flag
+                'schema.tests.SchemaTests.test_char_field_pk_to_auto_field',
+
+                # Unsupported modify charset from utf8mb4 to utf8
+                'schema.tests.SchemaTests.test_ci_cs_db_collation',
+
+                # Unsupported drop integer primary key
+                'schema.tests.SchemaTests.test_primary_key',
+
+                # wrong result
+                'schema.tests.SchemaTests.test_alter_pk_with_self_referential_field',
+                'schema.tests.SchemaTests.test_db_table',
+                'schema.tests.SchemaTests.test_indexes',
+                'schema.tests.SchemaTests.test_inline_fk',
+                'schema.tests.SchemaTests.test_remove_constraints_capital_letters',
+                'schema.tests.SchemaTests.test_remove_db_index_doesnt_remove_custom_indexes',
+                'schema.tests.SchemaTests.test_rename_column_renames_deferred_sql_references',
+                'schema.tests.SchemaTests.test_rename_referenced_field',
+                'schema.tests.SchemaTests.test_rename_table_renames_deferred_sql_references',
             }
         }
         return skips
@@ -230,4 +253,4 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
     @cached_property
     def supports_expression_indexes(self):
-        return False
+        return True
