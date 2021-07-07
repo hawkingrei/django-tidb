@@ -112,6 +112,10 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
                 # not support ORDER BY RANDOM() ASC
                 'ordering.tests.OrderingTests.test_random_ordering',
+
+                # [planner:3065]Expression #1 of ORDER BY clause is not in SELECT list, references column '' which is
+                # not in SELECT list; this is incompatible with
+                'ordering.tests.OrderingTests.test_orders_nulls_first_on_filtered_subquery',
             }
         }
         return skips
