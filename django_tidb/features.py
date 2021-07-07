@@ -59,9 +59,6 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'aggregation.tests.AggregateTestCase.test_avg_duration_field',
                 'aggregation.tests.AggregateTestCase.test_aggregation_random_ordering',
 
-                # Unsupported multi schema change
-                'indexes.tests.SchemaIndexesMySQLTests.test_no_index_for_foreignkey',
-
                 'lookup.tests.LookupTests.test_regex',
 
                 'queries.tests.ComparisonTests.test_ticket8597',
@@ -119,14 +116,35 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 # not in SELECT list; this is incompatible with
                 'ordering.tests.OrderingTests.test_orders_nulls_first_on_filtered_subquery',
 
-                'schema.tests.SchemaTests.test_rename_referenced_field',
-                'schema.tests.SchemaTests.test_remove_db_index_doesnt_remove_custom_indexes',
-                'schema.tests.SchemaTests.test_remove_constraints_capital_letters',
-                'schema.tests.SchemaTests.test_m2m_repoint_inherited',
-                'schema.tests.SchemaTests.test_m2m_repoint_custom',
-                'schema.tests.SchemaTests.test_m2m_repoint',
-                'schema.tests.SchemaTests.test_indexes',
-                'schema.tests.SchemaTests.test_foreign_key_index_long_names_regression',
+                # You have an error in your SQL syntax
+                'schema.tests.SchemaTests.test_add_field_binary',
+                'schema.tests.SchemaTests.test_add_textfield_default_nullable',
+                'schema.tests.SchemaTests.test_add_textfield_unhashable_default',
+
+                # Unsupported modify column: this column has primary key flag
+                'schema.tests.SchemaTests.test_alter_auto_field_to_char_field',
+
+                # Unsupported modify column: can't remove auto_increment without @@tidb_allow_remove_auto_inc enabled
+                'schema.tests.SchemaTests.test_alter_auto_field_to_integer_field',
+
+                # 'Unsupported modify column: this column has primary key flag
+                'schema.tests.SchemaTests.test_alter_autofield_pk_to_smallautofield_pk_sequence_owner',
+
+                # Found wrong number (0) of check constraints for schema_author.height
+                'schema.tests.SchemaTests.test_alter_field_default_dropped',
+
+                # Unsupported modify column: can't set auto_increment
+                'schema.tests.SchemaTests.test_alter_int_pk_to_autofield_pk',
+                'schema.tests.SchemaTests.test_alter_int_pk_to_bigautofield_pk',
+
+                # Unsupported drop primary key when the table's pkIsHandle is true
+                'schema.tests.SchemaTests.test_alter_int_pk_to_int_unique',
+
+                # Unsupported drop integer primary key
+                'schema.tests.SchemaTests.test_alter_not_unique_field_to_primary_key',
+
+
+
             }
         }
         return skips
