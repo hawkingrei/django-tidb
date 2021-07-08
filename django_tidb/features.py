@@ -189,6 +189,33 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
                 # Unknown column 'annotations_publisher.id' in 'where clause'
                 'annotations.tests.NonAggregateAnnotationTestCase.test_annotation_filter_with_subquery',
+
+                # Duplicate entry 'admin' for key 'username'
+                'auth_tests.test_admin_multidb.MultiDatabaseTests.test_add_view',
+
+                # Duplicate entry 'app_b-examplemodelb' for key 'django_content_type_app_label_model_76bd3d3b_uniq'
+                'auth_tests.test_models.LoadDataWithNaturalKeysAndMultipleDatabasesTestCase'
+                '.test_load_data_with_user_permissions',
+
+                'auth_tests.test_views.ChangelistTests.test_view_user_password_is_readonly',
+                'auth_tests.test_migrations.MultiDBProxyModelAppLabelTests',
+                'auth_tests.test_management.GetDefaultUsernameTestCase.test_with_database',
+
+                # You have an error in your SQL syntax; check the manual that corresponds to your TiDB
+                # version for the right syntax to use line 2 column 25 near "PROCEDURE test_procedure
+                # (P_I INTEGER)\n        BEGIN\n            DECLARE V_I INTEGER;\n            SET V_I
+                # = P_I;\n        END;\n    "
+                'backends.test_utils.CursorWrapperTests.test_callproc_with_int_params',
+
+                # You have an error in your SQL syntax; check the manual that corresponds to your TiDB
+                # version for the right syntax to use line 2 column 25 near "PROCEDURE test_procedure ()\n
+                # BEGIN\n            DECLARE V_I INTEGER;\n            SET V_I = 1;\n        END;\n    "
+                'backends.test_utils.CursorWrapperTests.test_callproc_without_params',
+
+                'backends.base.test_base.ExecuteWrapperTests.test_nested_wrapper_invoked',
+                'backends.base.test_base.ExecuteWrapperTests.test_outer_wrapper_blocks',
+                'backends.tests.FkConstraintsTests.test_check_constraints',
+                'backends.tests.FkConstraintsTests.test_check_constraints_sql_keywords',
             }
         }
         return skips
