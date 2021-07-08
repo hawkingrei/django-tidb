@@ -87,6 +87,18 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
                 # wrong test result
                 'transaction_hooks.tests.TestConnectionOnCommit.test_inner_savepoint_does_not_affect_outer',
+                'filtered_relation.tests.FilteredRelationTests.test_as_subquery',
+                'filtered_relation.tests.FilteredRelationTests.test_defer',
+                'filtered_relation.tests.FilteredRelationTests.test_exclude_relation_with_join',
+                'filtered_relation.tests.FilteredRelationTests.test_extra',
+                'filtered_relation.tests.FilteredRelationTests.test_multiple_times',
+                'filtered_relation.tests.FilteredRelationTests.test_select_for_update',
+                'filtered_relation.tests.FilteredRelationTests.test_union',
+                'filtered_relation.tests.FilteredRelationTests.test_values',
+                'filtered_relation.tests.FilteredRelationTests.test_values_list',
+                'filtered_relation.tests.FilteredRelationTests.test_with_exclude',
+                'filtered_relation.tests.FilteredRelationTests.test_with_join',
+                'filtered_relation.tests.FilteredRelationTests.test_with_join_and_complex_condition',
 
                 # django.db.transaction.TransactionManagementError: An error occurred in the current transaction. You
                 # can't execute queries until the end of the 'atomic' block.
