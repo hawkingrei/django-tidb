@@ -101,6 +101,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'filtered_relation.tests.FilteredRelationTests.test_with_join',
                 'filtered_relation.tests.FilteredRelationTests.test_with_join_and_complex_condition',
                 'fixtures_regress.tests.TestFixtures.test_loaddata_raises_error_when_fixture_has_invalid_foreign_key',
+                'introspection.tests.IntrospectionTests.test_get_table_description_nullable'
 
                 # django.db.transaction.TransactionManagementError: An error occurred in the current transaction. You
                 # can't execute queries until the end of the 'atomic' block.
@@ -246,6 +247,33 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 # 'test_django_tests.defer_regress_location.id' which is not functionally dependent on columns in GROUP
                 # BY clause; this is incompatible with sql_mode=only_full_group_by
                 'defer_regress.tests.DeferAnnotateSelectRelatedTest.test_defer_annotate_select_related',
+
+                'db_functions.comparison.test_cast.CastTests.test_cast_from_python',
+                'db_functions.math.test_random.RandomTests.test',
+                'db_functions.text.test_chr.ChrTests.test_basic',
+                'db_functions.text.test_chr.ChrTests.test_non_ascii',
+                'db_functions.text.test_chr.ChrTests.test_transform',
+                'db_functions.text.test_sha224.SHA224Tests.test_basic',
+                'db_functions.text.test_sha224.SHA224Tests.test_transform',
+                'db_functions.text.test_sha256.SHA256Tests.test_basic',
+                'db_functions.text.test_sha256.SHA256Tests.test_transform',
+                'db_functions.text.test_sha384.SHA384Tests.test_basic',
+                'db_functions.text.test_sha384.SHA384Tests.test_transform',
+                'db_functions.text.test_sha512.SHA512Tests.test_basic',
+                'db_functions.text.test_sha512.SHA512Tests.test_transform',
+                'db_functions.comparison.test_greatest.GreatestTests.test_basic',
+                'db_functions.comparison.test_least.LeastTests.test_basic',
+                'db_functions.datetime.test_extract_trunc.DateFunctionTests.test_trunc_time_func',
+                'db_functions.datetime.test_extract_trunc.DateFunctionWithTimeZoneTests.test_extract_func_with_timezone',
+                'db_functions.datetime.test_extract_trunc.DateFunctionWithTimeZoneTests.test_extract_func_with_timezone',
+                'db_functions.datetime.test_extract_trunc.DateFunctionWithTimeZoneTests.test_trunc_time_func',
+                'db_functions.datetime.test_extract_trunc.DateFunctionWithTimeZoneTests'
+                '.test_trunc_timezone_applied_before_truncation',
+                'db_functions.datetime.test_extract_trunc.DateFunctionWithTimeZoneTests'
+                ').test_trunc_timezone_applied_before_truncation',
+                'db_functions.text.test_concat.ConcatTests.test_basic',
+                'db_functions.text.test_concat.ConcatTests.test_many',
+                'db_functions.text.test_reverse.ReverseTests.test_expressions',
             }
         }
         return skips
