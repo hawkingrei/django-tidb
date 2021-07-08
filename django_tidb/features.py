@@ -99,6 +99,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'filtered_relation.tests.FilteredRelationTests.test_with_exclude',
                 'filtered_relation.tests.FilteredRelationTests.test_with_join',
                 'filtered_relation.tests.FilteredRelationTests.test_with_join_and_complex_condition',
+                'fixtures_regress.tests.TestFixtures.test_loaddata_raises_error_when_fixture_has_invalid_foreign_key',
 
                 # django.db.transaction.TransactionManagementError: An error occurred in the current transaction. You
                 # can't execute queries until the end of the 'atomic' block.
