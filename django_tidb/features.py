@@ -241,6 +241,11 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'get_or_create.tests.UpdateOrCreateTests.test_integrity',
                 'get_or_create.tests.UpdateOrCreateTests.test_manual_primary_key_test',
                 'get_or_create.tests.UpdateOrCreateTestsWithManualPKs.test_create_with_duplicate_primary_key',
+
+                # Expression #7 of SELECT list is not in GROUP BY clause and contains nonaggregated column
+                # 'test_django_tests.defer_regress_location.id' which is not functionally dependent on columns in GROUP
+                # BY clause; this is incompatible with sql_mode=only_full_group_by
+                'defer_regress.tests.DeferAnnotateSelectRelatedTest.test_defer_annotate_select_related',
             }
         }
         return skips
