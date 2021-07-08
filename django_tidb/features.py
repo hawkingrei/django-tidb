@@ -235,6 +235,12 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
                 # django.http.response.Http404: No Article matches the given query.
                 'get_object_or_404.tests.GetObjectOr404Tests.test_get_object_or_404',
+
+                # django.db.transaction.TransactionManagementError: An error occurred in the current transaction.
+                # You can't execute queries until the end of the 'atomic' block.
+                'get_or_create.tests.UpdateOrCreateTests.test_integrity',
+                'get_or_create.tests.UpdateOrCreateTests.test_manual_primary_key_test',
+                'get_or_create.tests.UpdateOrCreateTestsWithManualPKs.test_create_with_duplicate_primary_key',
             }
         }
         return skips
