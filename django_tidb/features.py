@@ -182,8 +182,12 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'schema.tests.SchemaTests.test_rename_referenced_field',
                 'schema.tests.SchemaTests.test_rename_table_renames_deferred_sql_references',
 
-
+                # Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column
+                # 'test_django_tests.annotations_book.id' which is not functionally dependent on columns in GROUP BY
+                # clause; this is incompatible with sql_mode=only_full_group_by
                 'annotations.tests.NonAggregateAnnotationTestCase.test_annotation_aggregate_with_m2o',
+
+                # Unknown column 'annotations_publisher.id' in 'where clause'
                 'annotations.tests.NonAggregateAnnotationTestCase.test_annotation_filter_with_subquery',
             }
         }
