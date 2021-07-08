@@ -232,6 +232,9 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
                 # Cannot assign "<Book: Book object (90)>": the current database router prevents this relation.
                 'prefetch_related.tests.MultiDbTests.test_using_is_honored_custom_qs',
+
+                # django.http.response.Http404: No Article matches the given query.
+                'get_object_or_404.tests.GetObjectOr404Tests.test_get_object_or_404',
             }
         }
         return skips
