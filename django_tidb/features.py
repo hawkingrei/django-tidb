@@ -230,8 +230,8 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'constraints.tests.CheckConstraintTests.test_database_constraint_expressionwrapper',
                 'constraints.tests.CheckConstraintTests.test_database_constraint_unicode',
 
-
-
+                # Cannot assign "<Book: Book object (90)>": the current database router prevents this relation.
+                'prefetch_related.tests.MultiDbTests.test_using_is_honored_custom_qs',
             }
         }
         return skips
