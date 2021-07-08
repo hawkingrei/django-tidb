@@ -181,6 +181,10 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'schema.tests.SchemaTests.test_rename_column_renames_deferred_sql_references',
                 'schema.tests.SchemaTests.test_rename_referenced_field',
                 'schema.tests.SchemaTests.test_rename_table_renames_deferred_sql_references',
+
+
+                'annotations.tests.NonAggregateAnnotationTestCase.test_annotation_aggregate_with_m2o',
+                'annotations.tests.NonAggregateAnnotationTestCase.test_annotation_filter_with_subquery',
             }
         }
         return skips
