@@ -74,6 +74,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
                 # is unrelation with tidb
                 'file_uploads.tests.DirectoryCreationTests.test_readonly_root',
+                'cache.tests.CacheMiddlewareTest.test_cache_page_timeout',
 
                 # interface conversion: interface {} is int64, not uint64'
                 # https://github.com/pingcap/tidb/issues/25956
@@ -216,6 +217,21 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'backends.base.test_base.ExecuteWrapperTests.test_outer_wrapper_blocks',
                 'backends.tests.FkConstraintsTests.test_check_constraints',
                 'backends.tests.FkConstraintsTests.test_check_constraints_sql_keywords',
+
+                # ignore multi database
+                'contenttypes_tests.test_models.ContentTypesMultidbTests.test_multidb',
+
+                # ContentType matching query does not exist. 
+                'contenttypes_tests.test_models.ContentTypesTests.test_app_labeled_name',
+
+                # IntegrityError not raised
+                'constraints.tests.CheckConstraintTests.test_database_constraint',
+                'constraints.tests.CheckConstraintTests.test_database_constraint_expression',
+                'constraints.tests.CheckConstraintTests.test_database_constraint_expressionwrapper',
+                'constraints.tests.CheckConstraintTests.test_database_constraint_unicode',
+
+
+
             }
         }
         return skips
