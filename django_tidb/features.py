@@ -87,6 +87,11 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'transactions.tests.DisableDurabiltityCheckTests.test_nested_inner_durable',
 
                 # wrong test result
+                'admin_changelist.tests.ChangeListTests.test_builtin_lookup_in_search_fields',
+                'admin_changelist.tests.ChangeListTests'
+                '.test_no_duplicates_for_many_to_many_at_second_level_in_search_fields',
+                'admin_changelist.tests.ChangeListTests'
+                '.test_no_duplicates_for_non_unique_related_object_in_search_fields',
                 'transaction_hooks.tests.TestConnectionOnCommit.test_inner_savepoint_does_not_affect_outer',
                 'filtered_relation.tests.FilteredRelationTests.test_as_subquery',
                 'filtered_relation.tests.FilteredRelationTests.test_defer',
@@ -102,6 +107,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'filtered_relation.tests.FilteredRelationTests.test_with_join_and_complex_condition',
                 'fixtures_regress.tests.TestFixtures.test_loaddata_raises_error_when_fixture_has_invalid_foreign_key',
                 'introspection.tests.IntrospectionTests.test_get_table_description_nullable'
+
 
                 # django.db.transaction.TransactionManagementError: An error occurred in the current transaction. You
                 # can't execute queries until the end of the 'atomic' block.
@@ -303,10 +309,21 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'model_fields.test_uuid.TestQuerying.test_iexact',
                 'model_fields.test_uuid.TestQuerying.test_istartswith',
 
-
                 # An error occurred in the current transaction. You can't execute queries until the end of the
                 # 'atomic' block." not found in 'Save with update_fields did not affect any rows.
                 'basic.tests.SelectOnSaveTests.test_select_on_save_lying_update',
+
+                'admin_views.test_multidb.MultiDatabaseTests.test_add_view',
+                'admin_views.test_multidb.MultiDatabaseTests.test_change_view',
+                'admin_views.test_multidb.MultiDatabaseTests.test_delete_view',
+                'admin_views.test_autocomplete_view.AutocompleteJsonViewTests.test_to_field_resolution_with_fk_pk',
+                'admin_views.test_autocomplete_view.AutocompleteJsonViewTests.test_to_field_resolution_with_mti ',
+                'admin_views.test_autocomplete_view.AutocompleteJsonViewTests.test_to_field_resolution_with_mti ',
+                'admin_views.tests.AdminSearchTest.test_exact_matches',
+                'admin_views.tests.AdminSearchTest.test_no_total_count',
+                'admin_views.tests.AdminSearchTest.test_search_on_sibling_models',
+                'admin_views.tests.GroupAdminTest.test_group_permission_performance',
+                'admin_views.tests.UserAdminTest.test_user_permission_performance',
             }
         }
         return skips
