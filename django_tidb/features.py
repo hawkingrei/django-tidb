@@ -302,6 +302,11 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'model_fields.test_uuid.TestQuerying.test_iendswith',
                 'model_fields.test_uuid.TestQuerying.test_iexact',
                 'model_fields.test_uuid.TestQuerying.test_istartswith',
+
+
+                # An error occurred in the current transaction. You can't execute queries until the end of the
+                # 'atomic' block." not found in 'Save with update_fields did not affect any rows.
+                'basic.tests.SelectOnSaveTests.test_select_on_save_lying_update',
             }
         }
         return skips
