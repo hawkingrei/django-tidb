@@ -298,6 +298,10 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'migrations.test_operations.OperationTests.test_add_or_constraint',
                 'migrations.test_operations.OperationTests.test_create_model_with_constraint',
                 'migrations.test_operations.OperationTests.test_remove_constraint',
+                'model_fields.test_uuid.TestQuerying.test_icontains',
+                'model_fields.test_uuid.TestQuerying.test_iendswith',
+                'model_fields.test_uuid.TestQuerying.test_iexact',
+                'model_fields.test_uuid.TestQuerying.test_istartswith',
             }
         }
         return skips
