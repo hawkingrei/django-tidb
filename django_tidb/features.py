@@ -323,6 +323,28 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'admin_views.tests.AdminSearchTest.test_search_on_sibling_models',
                 'admin_views.tests.GroupAdminTest.test_group_permission_performance',
                 'admin_views.tests.UserAdminTest.test_user_permission_performance',
+
+                'multiple_database.tests.FixtureTestCase.test_fixture_loading',
+                'multiple_database.tests.RouterTestCase.test_deferred_models',
+                'multiple_database.tests.RouterTestCase.test_foreign_key_cross_database_protection',
+                'multiple_database.tests.RouterTestCase.test_generic_key_cross_database_protection',
+                'multiple_database.tests.SignalTests.test_database_arg_m2m',
+                'multiple_database.tests.AuthTestCase.test_auth_manager',
+                'multiple_database.tests.QueryTestCase.test_basic_queries',
+                'multiple_database.tests.QueryTestCase.test_default_creation',
+                'multiple_database.tests.QueryTestCase.test_foreign_key_deletion',
+                'multiple_database.tests.QueryTestCase.test_foreign_key_separation',
+                'multiple_database.tests.QueryTestCase.test_generic_key_deletion',
+                'multiple_database.tests.QueryTestCase.test_generic_key_reverse_operations',
+                'multiple_database.tests.QueryTestCase.test_m2m_deletion',
+                'multiple_database.tests.QueryTestCase.test_m2m_separation',
+                'multiple_database.tests.QueryTestCase.test_o2o_cross_database_protection',
+                'multiple_database.tests.QueryTestCase.test_o2o_separation',
+                'multiple_database.tests.QueryTestCase.test_ordering',
+                'multiple_database.tests.QueryTestCase.test_other_creation',
+                'multiple_database.tests.QueryTestCase.test_refresh',
+                'multiple_database.tests.RouterTestCase.test_database_routing',
+                'multiple_database.tests.RouterTestCase.test_m2m_cross_database_protection',
             }
         }
         return skips
