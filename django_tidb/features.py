@@ -270,10 +270,34 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'db_functions.datetime.test_extract_trunc.DateFunctionWithTimeZoneTests'
                 '.test_trunc_timezone_applied_before_truncation',
                 'db_functions.datetime.test_extract_trunc.DateFunctionWithTimeZoneTests'
-                ').test_trunc_timezone_applied_before_truncation',
+                '.test_trunc_timezone_applied_before_truncation',
                 'db_functions.text.test_concat.ConcatTests.test_basic',
                 'db_functions.text.test_concat.ConcatTests.test_many',
                 'db_functions.text.test_reverse.ReverseTests.test_expressions',
+
+                'migrations.test_commands.MigrateTests.test_migrate_fake_initial_case_insensitive',
+'migrations.test_commands.MigrateTests.test_migrate_fake_split_initial',
+'migrations.test_commands.MigrateTests.test_migrate_plan',
+'migrations.test_executor.ExecutorTests.test_alter_id_type_with_fk',
+'migrations.test_operations.OperationTests.test_add_binaryfield',
+'migrations.test_operations.OperationTests.test_add_textfield',
+'migrations.test_operations.OperationTests.test_alter_field_pk',
+'migrations.test_operations.OperationTests.test_alter_field_reloads_state_on_fk_target_changes',
+'migrations.test_operations.OperationTests.test_autofield__bigautofield_foreignfield_growth',
+'migrations.test_operations.OperationTests.test_rename_field_reloads_state_on_fk_target_changes',
+'migrations.test_operations.OperationTests.test_smallfield_autofield_foreignfield_growth',
+'migrations.test_operations.OperationTests.test_smallfield_bigautofield_foreignfield_growth',
+'migrations.test_loader.RecorderTests.test_apply',
+'migrations.test_commands.MigrateTests.test_migrate_fake_initial',
+'migrations.test_commands.MigrateTests.test_migrate_initial_false',
+'migrations.test_commands.MigrateTests.test_migrate_syncdb_app_label',
+'migrations.test_commands.MigrateTests.test_migrate_syncdb_deferred_sql_executed_with_schemaeditor',
+'migrations.test_operations.OperationTests.test_add_constraint',
+'migrations.test_operations.OperationTests.test_add_constraint_combinable',
+'migrations.test_operations.OperationTests.test_add_constraint_percent_escaping',
+'migrations.test_operations.OperationTests.test_add_or_constraint',
+'migrations.test_operations.OperationTests.test_create_model_with_constraint',
+'migrations.test_operations.OperationTests.test_remove_constraint',
             }
         }
         return skips
