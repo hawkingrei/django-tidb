@@ -20,7 +20,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
     supports_foreign_keys = False
     indexes_foreign_keys = False
     test_collations = {
-        'ci': 'utf8_general_ci',
+        'ci': 'utf8mb4_general_ci',
         'non_default': 'utf8mb4_unicode_ci',
     }
 
