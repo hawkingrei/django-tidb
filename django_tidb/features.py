@@ -112,6 +112,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 # can't execute queries until the end of the 'atomic' block.
                 'transaction_hooks.tests.TestConnectionOnCommit.test_inner_savepoint_rolled_back_with_outer',
                 'transaction_hooks.tests.TestConnectionOnCommit.test_discards_hooks_from_rolled_back_savepoint',
+                'transaction_hooks.tests.TestConnectionOnCommit.test_inner_savepoint_rolled_back_with_outer',
 
                 # AssertionError: True is not false
                 'sites_tests.tests.CreateDefaultSiteTests.test_multi_db_with_router',
