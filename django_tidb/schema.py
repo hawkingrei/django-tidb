@@ -2,6 +2,7 @@ from django.db.backends.mysql.schema import (
     DatabaseSchemaEditor as MysqlDatabaseSchemaEditor,
 )
 
+
 class DatabaseSchemaEditor(MysqlDatabaseSchemaEditor):
     @property
     def sql_delete_check(self):

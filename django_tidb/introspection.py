@@ -1,16 +1,13 @@
 from collections import namedtuple
 
-import sqlparse
-from MySQLdb.constants import FIELD_TYPE
-
 from django.db.backends.base.introspection import (
     BaseDatabaseIntrospection, FieldInfo as BaseFieldInfo, TableInfo,
 )
-from django.db.models import Index
-from django.utils.datastructures import OrderedSet
 from django.db.backends.mysql.introspection import (
     DatabaseIntrospection as MysqlDatabaseIntrospection,
 )
+from django.db.models import Index
+from django.utils.datastructures import OrderedSet
 
 FieldInfo = namedtuple('FieldInfo', BaseFieldInfo._fields + ('extra', 'is_unsigned', 'has_json_constraint'))
 InfoLine = namedtuple(

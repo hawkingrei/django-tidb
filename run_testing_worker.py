@@ -20,8 +20,8 @@ print("test apps: ", all_apps)
 if not all_apps:
     exit()
 
-print("Starting tidb-server with logging to /tidb.log")
-subprocess.Popen(["/tidb-server", "-log-file", "/tidb.log"])
+#print("Starting tidb-server with logging to /tidb.log")
+#subprocess.Popen(["/tidb-server", "-log-file", "/tidb.log"])
 time.sleep(3)
 
 os.system(

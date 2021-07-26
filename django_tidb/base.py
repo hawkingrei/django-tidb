@@ -2,31 +2,22 @@
 MySQL database backend for Django.
 Requires mysqlclient: https://pypi.org/project/mysqlclient/
 """
-from django.core.exceptions import ImproperlyConfigured
-from django.db import IntegrityError
-from django.db.backends import utils as backend_utils
-from django.db.backends.base.base import BaseDatabaseWrapper
-from django.utils.asyncio import async_unsafe
-from django.utils.functional import cached_property
-from django.utils.regex_helper import _lazy_re_compile
 from django.db.backends.mysql.base import (
     DatabaseWrapper as MysqlDatabaseWrapper,
 )
+from django.utils.functional import cached_property
 
 # Some of these import MySQLdb, so import them after checking if it's installed.
 from .features import DatabaseFeatures
 from .introspection import DatabaseIntrospection
 from .operations import DatabaseOperations
 from .schema import DatabaseSchemaEditor
-
-# This should match the numerical portion of the version numbers (we can treat
-# versions like 5.0.24 and 5.0.24a as the same).
-server_version_re = _lazy_re_compile(r'(\d{1,2})\.(\d{1,2})\.(\d{1,2})')
+from .version import TiDBVersion
 
 
 class DatabaseWrapper(MysqlDatabaseWrapper):
     vendor = 'tidb'
-    display_name = 'tidb'
+    display_name = 'TiDB'
 
     SchemaEditorClass = DatabaseSchemaEditor
     # Classes instantiated in __init__().
@@ -80,10 +71,10 @@ class DatabaseWrapper(MysqlDatabaseWrapper):
 
     @cached_property
     def tidb_version(self):
-        match = server_version_re.match(self.tidb_server_info)
+        match = TiDBVersion.match(self.tidb_server_info)
         if not match:
             raise Exception('Unable to determine Tidb version from version string %r' % self.tidb_server_info)
-        return tuple(int(x) for x in match.groups())
+        return match.version
 
     @cached_property
     def sql_mode(self):
