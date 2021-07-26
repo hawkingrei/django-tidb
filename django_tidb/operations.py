@@ -1,9 +1,3 @@
-import uuid
-
-from django.conf import settings
-from django.db.backends.base.operations import BaseDatabaseOperations
-from django.utils import timezone
-from django.utils.encoding import force_str
 from django.db.backends.mysql.operations import (
     DatabaseOperations as MysqlDatabaseOperations,
 )

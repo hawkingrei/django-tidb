@@ -1,10 +1,9 @@
 import operator
 
-from django.db.backends.base.features import BaseDatabaseFeatures
-from django.utils.functional import cached_property
 from django.db.backends.mysql.features import (
     DatabaseFeatures as MysqlDatabaseFeatures,
 )
+from django.utils.functional import cached_property
 
 
 class DatabaseFeatures(MysqlDatabaseFeatures):
@@ -138,6 +137,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'ordering.tests.OrderingTests.test_orders_nulls_first_on_filtered_subquery',
 
                 # You have an error in your SQL syntax
+                'schema.tests.SchemaTests.test_func_index_cast',
                 'schema.tests.SchemaTests.test_add_field_binary',
                 'schema.tests.SchemaTests.test_add_textfield_default_nullable',
                 'schema.tests.SchemaTests.test_add_textfield_unhashable_default',
