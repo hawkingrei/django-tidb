@@ -7,7 +7,7 @@ from django.utils.functional import cached_property
 
 
 class DatabaseFeatures(MysqlDatabaseFeatures):
-    has_select_for_update = False
+    has_select_for_update = True
     supports_transactions = False
     uses_savepoints = False
     can_release_savepoints = False
@@ -15,7 +15,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
     supports_atomic_references_rename = False
     can_clone_databases = False
     can_rollback_ddl = False
-    order_by_nulls_first = False
+    order_by_nulls_first = True
     supports_foreign_keys = False
     indexes_foreign_keys = False
     test_collations = {
@@ -340,6 +340,9 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'multiple_database.tests.QueryTestCase.test_refresh',
                 'multiple_database.tests.RouterTestCase.test_database_routing',
                 'multiple_database.tests.RouterTestCase.test_m2m_cross_database_protection',
+
+                # about Pessimistic/Optimistic Transaction Model
+                'select_for_update.tests.SelectForUpdateTests.test_raw_lock_not_available',
             }
         }
         return skips
