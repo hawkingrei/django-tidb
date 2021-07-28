@@ -42,3 +42,6 @@ class DatabaseOperations(MysqlDatabaseOperations):
 
     def adapt_timefield_value(self, value):
         return value
+
+    def set_time_zone_sql(self):
+        return "SET time_zone = %s"
