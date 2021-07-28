@@ -97,7 +97,11 @@ class DatabaseWrapper(MysqlDatabaseWrapper):
 
     def init_connection_state(self):
         assignments = []
-        self.ensure_timezone()
+        timezone_changed = self.ensure_timezone()
+        if timezone_changed:
+            # Commit after setting the time zone (see #17062)
+            if not self.get_autocommit():
+                self.connection.commit()
         if self.features.is_sql_auto_is_null_enabled:
             # SQL_AUTO_IS_NULL controls whether an AUTO_INCREMENT column on
             # a recently inserted row will return when the field is tested

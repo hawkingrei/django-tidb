@@ -44,4 +44,4 @@ class DatabaseOperations(MysqlDatabaseOperations):
         return value
 
     def set_time_zone_sql(self):
-        return "SET time_zone = %s"
+        return "SET GLOBAL time_zone = %s"
