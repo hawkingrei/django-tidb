@@ -430,4 +430,4 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
     @cached_property
     def supports_expression_indexes(self):
-        return True
+        return self.connection.tidb_version >= (5, 1, )
