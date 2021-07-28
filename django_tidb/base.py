@@ -55,7 +55,7 @@ class DatabaseWrapper(MysqlDatabaseWrapper):
                        @@sql_auto_is_null,
                        @@lower_case_table_names,
                        CONVERT_TZ('2001-01-01 01:00:00', 'UTC', 'UTC') IS NOT NULL,
-                       @@session.time_zone,
+                       @@session.time_zone
             """)
             row = cursor.fetchone()
         return {
