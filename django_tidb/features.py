@@ -355,7 +355,6 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
     @cached_property
     def can_introspect_foreign_keys(self):
-        "Confirm support for introspected foreign keys"
         return False
 
     @cached_property
