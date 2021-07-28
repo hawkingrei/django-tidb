@@ -8,7 +8,7 @@ class TiDBVersion:
 
     def match(self, version):
         version_list = version.split('-')
-        if len(version_list) > 3:
+        if len(version_list) < 3:
             return False
         tidb_version_list = version_list[2].lstrip('v').split('.')
         self._version = tuple(int(x) for x in tidb_version_list)
