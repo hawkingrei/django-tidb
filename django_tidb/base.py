@@ -14,6 +14,7 @@ from .operations import DatabaseOperations
 from .schema import DatabaseSchemaEditor
 from .version import TiDBVersion
 
+server_version = TiDBVersion()
 
 class DatabaseWrapper(MysqlDatabaseWrapper):
     vendor = 'tidb'
@@ -71,7 +72,7 @@ class DatabaseWrapper(MysqlDatabaseWrapper):
 
     @cached_property
     def tidb_version(self):
-        match = TiDBVersion.match(self.tidb_server_info)
+        match = server_version.match(self.tidb_server_info)
         if not match:
             raise Exception('Unable to determine Tidb version from version string %r' % self.tidb_server_info)
         return match.version
