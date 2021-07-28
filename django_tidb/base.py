@@ -55,7 +55,7 @@ class DatabaseWrapper(MysqlDatabaseWrapper):
                        @@sql_auto_is_null,
                        @@lower_case_table_names,
                        CONVERT_TZ('2001-01-01 01:00:00', 'UTC', 'UTC') IS NOT NULL,
-                       @@session.time_zone
+                       @@session.time_zone,
             """)
             row = cursor.fetchone()
         return {
@@ -93,9 +93,9 @@ class DatabaseWrapper(MysqlDatabaseWrapper):
             with self.cursor() as cursor:
                 cursor.execute(self.ops.set_time_zone_sql(), [timezone_name])
 
-
     def init_connection_state(self):
         assignments = []
+        self.ensure_timezone()
         if self.features.is_sql_auto_is_null_enabled:
             # SQL_AUTO_IS_NULL controls whether an AUTO_INCREMENT column on
             # a recently inserted row will return when the field is tested
@@ -105,11 +105,6 @@ class DatabaseWrapper(MysqlDatabaseWrapper):
 
         if self.isolation_level:
             assignments.append('SET SESSION TRANSACTION ISOLATION LEVEL %s' % self.isolation_level.upper())
-
-        conn_timezone_name = self.tidb_server_data['timezone']
-        timezone_name = self.timezone_name
-        if timezone_name and conn_timezone_name != timezone_name:
-            assignments.append(self.ops.set_time_zone_sql() % timezone_name)
 
         if assignments:
             with self.cursor() as cursor:
