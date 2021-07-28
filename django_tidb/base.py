@@ -75,7 +75,7 @@ class DatabaseWrapper(MysqlDatabaseWrapper):
         match = server_version.match(self.tidb_server_info)
         if not match:
             raise Exception('Unable to determine Tidb version from version string %r' % self.tidb_server_info)
-        return match.version
+        return server_version.version
 
     @cached_property
     def sql_mode(self):
