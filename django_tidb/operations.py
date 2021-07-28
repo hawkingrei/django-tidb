@@ -35,3 +35,10 @@ class DatabaseOperations(MysqlDatabaseOperations):
         if internal_type == 'JSONField':
             lookup = 'JSON_UNQUOTE(%s)'
         return lookup
+
+def adapt_datetimefield_value(self, value):
+    return value
+
+
+def adapt_timefield_value(self, value):
+    return value

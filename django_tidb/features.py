@@ -22,6 +22,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
         'ci': 'utf8mb4_general_ci',
         'non_default': 'utf8mb4_unicode_ci',
     }
+    supports_timezones = True
 
     @cached_property
     def django_test_skips(self):
