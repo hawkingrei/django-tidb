@@ -54,7 +54,8 @@ class DatabaseWrapper(MysqlDatabaseWrapper):
                        @@default_storage_engine,
                        @@sql_auto_is_null,
                        @@lower_case_table_names,
-                       CONVERT_TZ('2001-01-01 01:00:00', 'UTC', 'UTC') IS NOT NULL
+                       CONVERT_TZ('2001-01-01 01:00:00', 'UTC', 'UTC') IS NOT NULL,
+                       @@session.time_zone,
             """)
             row = cursor.fetchone()
         return {
@@ -64,6 +65,7 @@ class DatabaseWrapper(MysqlDatabaseWrapper):
             'sql_auto_is_null': bool(row[3]),
             'lower_case_table_names': bool(row[4]),
             'has_zoneinfo_database': bool(row[5]),
+            'timezone': row[6],
         }
 
     @cached_property
@@ -81,3 +83,34 @@ class DatabaseWrapper(MysqlDatabaseWrapper):
     def sql_mode(self):
         sql_mode = self.tidb_server_data['sql_mode']
         return set(sql_mode.split(',') if sql_mode else ())
+
+    def ensure_timezone(self):
+        if self.connection is None:
+            return False
+        conn_timezone_name = self.tidb_server_data['timezone']
+        timezone_name = self.timezone_name
+        if timezone_name and conn_timezone_name != timezone_name:
+            with self.cursor() as cursor:
+                cursor.execute(self.ops.set_time_zone_sql(), [timezone_name])
+
+
+    def init_connection_state(self):
+        assignments = []
+        if self.features.is_sql_auto_is_null_enabled:
+            # SQL_AUTO_IS_NULL controls whether an AUTO_INCREMENT column on
+            # a recently inserted row will return when the field is tested
+            # for NULL. Disabling this brings this aspect of MySQL in line
+            # with SQL standards.
+            assignments.append('SET SQL_AUTO_IS_NULL = 0')
+
+        if self.isolation_level:
+            assignments.append('SET SESSION TRANSACTION ISOLATION LEVEL %s' % self.isolation_level.upper())
+
+        conn_timezone_name = self.tidb_server_data['timezone']
+        timezone_name = self.timezone_name
+        if timezone_name and conn_timezone_name != timezone_name:
+            assignments.append(self.ops.set_time_zone_sql() % timezone_name)
+
+        if assignments:
+            with self.cursor() as cursor:
+                cursor.execute('; '.join(assignments))
