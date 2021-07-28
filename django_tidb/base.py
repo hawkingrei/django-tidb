@@ -92,6 +92,8 @@ class DatabaseWrapper(MysqlDatabaseWrapper):
         if timezone_name and conn_timezone_name != timezone_name:
             with self.cursor() as cursor:
                 cursor.execute(self.ops.set_time_zone_sql(), [timezone_name])
+            return True
+        return False
 
     def init_connection_state(self):
         assignments = []
