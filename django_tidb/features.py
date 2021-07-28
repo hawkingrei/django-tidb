@@ -75,12 +75,6 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'file_uploads.tests.DirectoryCreationTests.test_readonly_root',
                 'cache.tests.CacheMiddlewareTest.test_cache_page_timeout',
 
-                # interface conversion: interface {} is int64, not uint64'
-                # https://github.com/pingcap/tidb/issues/25956
-                'expressions_window.tests.WindowFunctionTests.test_max_per_year',
-                'expressions_window.tests.WindowFunctionTests.test_min_department',
-                'expressions_window.tests.WindowFunctionTests.test_multiple_partitioning',
-
                 # RuntimeError: A durable atomic block cannot be nested within another atomic block.
                 'transactions.tests.DisableDurabiltityCheckTests.test_nested_both_durable',
                 'transactions.tests.DisableDurabiltityCheckTests.test_nested_inner_durable',
