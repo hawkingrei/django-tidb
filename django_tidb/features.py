@@ -1,10 +1,9 @@
 import operator
 
-from django.db.backends.base.features import BaseDatabaseFeatures
-from django.utils.functional import cached_property
 from django.db.backends.mysql.features import (
     DatabaseFeatures as MysqlDatabaseFeatures,
 )
+from django.utils.functional import cached_property
 
 
 class DatabaseFeatures(MysqlDatabaseFeatures):
@@ -76,12 +75,6 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'file_uploads.tests.DirectoryCreationTests.test_readonly_root',
                 'cache.tests.CacheMiddlewareTest.test_cache_page_timeout',
 
-                # interface conversion: interface {} is int64, not uint64'
-                # https://github.com/pingcap/tidb/issues/25956
-                'expressions_window.tests.WindowFunctionTests.test_max_per_year',
-                'expressions_window.tests.WindowFunctionTests.test_min_department',
-                'expressions_window.tests.WindowFunctionTests.test_multiple_partitioning',
-
                 # RuntimeError: A durable atomic block cannot be nested within another atomic block.
                 'transactions.tests.DisableDurabiltityCheckTests.test_nested_both_durable',
                 'transactions.tests.DisableDurabiltityCheckTests.test_nested_inner_durable',
@@ -113,6 +106,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 # can't execute queries until the end of the 'atomic' block.
                 'transaction_hooks.tests.TestConnectionOnCommit.test_inner_savepoint_rolled_back_with_outer',
                 'transaction_hooks.tests.TestConnectionOnCommit.test_discards_hooks_from_rolled_back_savepoint',
+                'transaction_hooks.tests.TestConnectionOnCommit.test_inner_savepoint_rolled_back_with_outer',
 
                 # AssertionError: True is not false
                 'sites_tests.tests.CreateDefaultSiteTests.test_multi_db_with_router',
@@ -138,6 +132,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'ordering.tests.OrderingTests.test_orders_nulls_first_on_filtered_subquery',
 
                 # You have an error in your SQL syntax
+                'schema.tests.SchemaTests.test_func_index_cast',
                 'schema.tests.SchemaTests.test_add_field_binary',
                 'schema.tests.SchemaTests.test_add_textfield_default_nullable',
                 'schema.tests.SchemaTests.test_add_textfield_unhashable_default',
@@ -429,4 +424,4 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
 
     @cached_property
     def supports_expression_indexes(self):
-        return True
+        return self.connection.tidb_version >= (5, 1, )
