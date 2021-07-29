@@ -7,7 +7,7 @@ from django.utils.functional import cached_property
 
 
 class DatabaseFeatures(MysqlDatabaseFeatures):
-    has_select_for_update = False
+    has_select_for_update = True
     supports_transactions = False
     uses_savepoints = False
     can_release_savepoints = False
@@ -15,7 +15,7 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
     supports_atomic_references_rename = False
     can_clone_databases = False
     can_rollback_ddl = False
-    order_by_nulls_first = False
+    order_by_nulls_first = True
     supports_foreign_keys = False
     indexes_foreign_keys = False
     test_collations = {
@@ -54,9 +54,14 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'aggregation_regress.tests.AggregationTests.test_boolean_conversion',
                 'aggregation_regress.tests.AggregationTests.test_more_more',
                 'aggregation_regress.tests.JoinPromotionTests.test_ticket_21150',
-                'aggregation.tests.AggregateTestCase.test_sum_duration_field',
-                'aggregation.tests.AggregateTestCase.test_avg_duration_field',
                 'aggregation.tests.AggregateTestCase.test_aggregation_random_ordering',
+                'annotations.tests.NonAggregateAnnotationTestCase.test_annotation_aggregate_with_m2o',
+                'defer_regress.tests.DeferAnnotateSelectRelatedTest.test_defer_annotate_select_related',
+
+                # TypeError: unsupported type for timedelta microseconds component: decimal.Decimal
+                'aggregation.tests.AggregateTestCase.test_sum_duration_field',
+                # TypeError: unsupported type for timedelta microseconds component: decimal.Decimal
+                'aggregation.tests.AggregateTestCase.test_avg_duration_field',
 
                 'lookup.tests.LookupTests.test_regex',
 
@@ -100,7 +105,6 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'filtered_relation.tests.FilteredRelationTests.test_with_join_and_complex_condition',
                 'fixtures_regress.tests.TestFixtures.test_loaddata_raises_error_when_fixture_has_invalid_foreign_key',
                 'introspection.tests.IntrospectionTests.test_get_table_description_nullable'
-
 
                 # django.db.transaction.TransactionManagementError: An error occurred in the current transaction. You
                 # can't execute queries until the end of the 'atomic' block.
@@ -185,11 +189,6 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'schema.tests.SchemaTests.test_rename_referenced_field',
                 'schema.tests.SchemaTests.test_rename_table_renames_deferred_sql_references',
 
-                # Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column
-                # 'test_django_tests.annotations_book.id' which is not functionally dependent on columns in GROUP BY
-                # clause; this is incompatible with sql_mode=only_full_group_by
-                'annotations.tests.NonAggregateAnnotationTestCase.test_annotation_aggregate_with_m2o',
-
                 # Unknown column 'annotations_publisher.id' in 'where clause'
                 'annotations.tests.NonAggregateAnnotationTestCase.test_annotation_filter_with_subquery',
 
@@ -243,11 +242,6 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'get_or_create.tests.UpdateOrCreateTests.test_integrity',
                 'get_or_create.tests.UpdateOrCreateTests.test_manual_primary_key_test',
                 'get_or_create.tests.UpdateOrCreateTestsWithManualPKs.test_create_with_duplicate_primary_key',
-
-                # Expression #7 of SELECT list is not in GROUP BY clause and contains nonaggregated column
-                # 'test_django_tests.defer_regress_location.id' which is not functionally dependent on columns in GROUP
-                # BY clause; this is incompatible with sql_mode=only_full_group_by
-                'defer_regress.tests.DeferAnnotateSelectRelatedTest.test_defer_annotate_select_related',
 
                 'db_functions.comparison.test_cast.CastTests.test_cast_from_python',
                 'db_functions.math.test_random.RandomTests.test',
@@ -340,6 +334,9 @@ class DatabaseFeatures(MysqlDatabaseFeatures):
                 'multiple_database.tests.QueryTestCase.test_refresh',
                 'multiple_database.tests.RouterTestCase.test_database_routing',
                 'multiple_database.tests.RouterTestCase.test_m2m_cross_database_protection',
+
+                # about Pessimistic/Optimistic Transaction Model
+                'select_for_update.tests.SelectForUpdateTests.test_raw_lock_not_available',
             }
         }
         return skips
