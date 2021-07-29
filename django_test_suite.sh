@@ -14,10 +14,6 @@ cp tidb_settings.py $DJANGO_TESTS_DIR/django/tidb_settings.py
 
 cd $DJANGO_TESTS_DIR/django && pip3 install -e . && pip3 install -r tests/requirements/py3.txt && pip3 install -r tests/requirements/mysql.txt; cd ../../
 
-# If no SPANNER_TEST_DB is set, generate a unique one
-# so that we can have multiple tests running without
-# conflicting which changes and constraints. We'll always
-# cleanup the created database.
 SETTINGS_FILE="$TEST_DBNAME-settings"
 TESTS_DIR=${DJANGO_TESTS_DIR:-django_tests}
 
